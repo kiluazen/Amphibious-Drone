@@ -1,15 +1,15 @@
 # Assignment 1 -> Amphibous Rotor Design
 
-Welcome to the rotor design! This document contains step by step process taken towards applying basic theories like Blade Element, Momentum Theory to design a rotor.
+Welcome to the rotor design report! This document contains step by step process taken towards applying basic theories like Blade Element, Momentum Theory to design a rotor for which a drone can move in air and water.
 
 ## Contents
 
-1. [Starting Assumptions & Data](#Assumptions)
+1. [Starting Assumptions & Data](#assumptions)
 2. [Initial Sizing](#initial-sizing)
     - [Rotor Diameter](#rotor-diameter)
     - [Ideal Power](#ideal-power)
 3. [My Code Folder Structure](#file-structure)
-4. [Computational Tool](#Code)
+4. [Computational Tool](#code-structure)
 5. [Benchmarking the Tools](#benchmarking-the-tools)
 6. [Design Variable Variations](#design-variable-variations)
 7. [Rotor Design & Performance](#rotor-design--performance)
@@ -81,15 +81,15 @@ It was taken to be 1.7 m . Roughly estimated by looking through drone blades her
 ## Design Variable Variations
 - Coefficients of Thrust and Power vs Solidity
 
-| <img src="images/ct_sigma.png" width="500"/> | <img src="images/cp_sigma.png" width="510"/> |
+| <img src="images/ct_sigma.png" width="490"/> | <img src="images/cp_sigma.png" width="500"/> |
 
 - Coefficients of Thrust and Power vs Taper ratio
 
-| <img src="images/ct_taperRatio.png" width="500"/> | <img src="images/cp_taperRatio.png" width="500"/> |
+| <img src="images/ct_taperRatio.png" width="490"/> | <img src="images/cp_taperRatio.png" width="490"/> |
 
 - Coefficients of Thrust and Power vs Twist
 
-| <img src="images/ct_twist.png" width="500"/> | <img src="images/cp_twist.png" width="500"/> |
+| <img src="images/ct_twist.png" width="490"/> | <img src="images/cp_twist.png" width="490"/> |
 
 
 ## Rotor Design & Performance
@@ -121,7 +121,7 @@ It was taken to be 1.7 m . Roughly estimated by looking through drone blades her
 | Power at Max Thrust in Water| 144.405| 267.0623      | 240.1076       |
 
 ## Acknowledgement
-- I wanna thank Taha my classmate, we has a lot of the discussion to understand why things are varying in a certain way.
+- I wanna thank Taha my classmate, we had a lot of the discussion to understand why things are varying in a certain way.
 - Thanks to Prof Dwanil Shukla , He helped me with doubts I had in the way to approach this Assignment
 
 ## Reference
