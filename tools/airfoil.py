@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy.stats import linregress
+# For a Given airfoil csv file (inside airfoil_data folder) this class can give you cd, lift_slope in future Cl/Cd AoA max value etc..
 class airfoil:
     def __init__(self, path) -> None:
         self.path = path
@@ -28,27 +29,3 @@ class airfoil:
         data = cd.iloc[50:100]
 
         return np.mean(np.array(data))
-# Plot the linear regression line
-# plt.plot(linear_data['Alpha'], slope * linear_data['Alpha'] + intercept, 'r')
-
-# Print the calculated slope
-# # print("Linear Slope (Cl-alpha):", slope)
-
-
-# # Plot the Cl-alpha data
-# plt.plot(np.array(cl_alpha_data['Alpha']), np.array(cl_alpha_data['Cl']))
-
-# # Select the linear range of data points (adjust these indices)
-# # Plot the linear regression line
-# plt.plot(linear_data['Alpha'], slope * linear_data['Alpha'] + intercept, 'r')
-
-# # Print the calculated slope
-# print("Linear Slope (Cl-alpha):", slope)
-
-# # Show the plot
-# plt.xlabel('Angle of Attack (Alpha)')
-# plt.ylabel('Lift Coefficient (Cl)')
-# plt.legend(['Cl-alpha data', 'Linear Regression'])
-# plt.title('Cl-alpha Curve with Linear Regression')
-# plt.grid(True)
-# # plt.show()

@@ -3,6 +3,7 @@ import math
 roAir = 1.225   # kg/m3 density of air
 roWater = 1000  # kg/m3
 g = 9.8         # m/s2
+# All the formula's took straight from the slides
 class BEMTheory:
     def __init__(self, no_of_blades, angular_vel, radius, lift_slope,drag, linear_twist,  climb_vel, root_cutouts , linear_taper, medium = 'air') -> None:
         self.linear_twist = linear_twist; self.linear_taper = linear_taper
@@ -31,7 +32,8 @@ class BEMTheory:
         F = (2/np.pi)*np.arccos(np.exp(-1*f))
         self.F = round(F,5)
         return self.F
-    
+    # With a initialization of F = 0.9 we calucalte lamda_1 and with lamda_1 we calculate F_2 then later lamda_2..... To converge lamda, F that's what this below function is doing
+    # We decide convergence if prev and current value diffrence is less than 1e-4
     def lamda_tipLoss(self,r_ratio):
         fs = [0.9]
         lamdas = [self.calcLamda(r_ratio, 0.9)]

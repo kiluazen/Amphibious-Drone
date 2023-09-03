@@ -4,6 +4,7 @@ roAir = 1.204   # kg/m3 density of air
 roWater = 1000  # kg/m3
 g = 9.8         # m/s2
 Cd = 0.015
+# All the formula's took straight from the slides
 class BETheory:
     def __init__(self, no_of_blades, chord_mean, angular_vel, radius, lift_slope, linear_twist,  climb_vel, induced_vel, root_cutouts) -> None:
         self.linear_twist = linear_twist
@@ -13,7 +14,6 @@ class BETheory:
         self.a = lift_slope
         self.b = no_of_blades
         self.c = chord_mean
-        # self.alpha_optimum  = alpha_optimum * np.pi/180 # Got this from NACA2412 data
         self.sigma = self.b*self.c/ (np.pi * self.R)
 
     def T(self):
