@@ -81,15 +81,15 @@ It was taken to be 1.7 m . Roughly estimated by looking through drone blades her
 ## Design Variable Variations
 - Coefficients of Thrust and Power vs Solidity
 
-| <img src="images/ct_sigma.png" width="490"/> | <img src="images/cp_sigma.png" width="500"/> |
+| <img src="images/ct_sigma.png" width="300"/> | <img src="images/cp_sigma.png" width="310"/> |
 
 - Coefficients of Thrust and Power vs Taper ratio
 
-| <img src="images/ct_taperRatio.png" width="490"/> | <img src="images/cp_taperRatio.png" width="490"/> |
+| <img src="images/ct_taperRatio.png" width="300"/> | <img src="images/cp_taperRatio.png" width="300"/> |
 
 - Coefficients of Thrust and Power vs Twist
 
-| <img src="images/ct_twist.png" width="490"/> | <img src="images/cp_twist.png" width="490"/> |
+| <img src="images/ct_twist.png" width="300"/> | <img src="images/cp_twist.png" width="300"/> |
 
 
 ## Rotor Design & Performance
