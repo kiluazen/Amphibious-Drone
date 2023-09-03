@@ -1,9 +1,7 @@
 # Assignment 1 -> Amphibous Rotor Design
 
-Welcome to the rotor design report! This document contains step by step process taken towards applying basic theories like Blade Element, Momentum Theory to design a rotor for which a drone can move in air and water.
-
+Welcome to the rotor design report! This document contains step by step process taken towards applying basic design theories like Blade Element, Momentum Theory to design a rotor for which a drone can move in air and water.
 ## Contents
-
 1. [Starting Assumptions & Data](#assumptions)
 2. [Initial Sizing](#initial-sizing)
     - [Rotor Diameter](#rotor-diameter)
@@ -13,18 +11,15 @@ Welcome to the rotor design report! This document contains step by step process 
 5. [Benchmarking the Tools](#benchmarking-the-tools)
 6. [Design Variable Variations](#design-variable-variations)
 7. [Rotor Design & Performance](#rotor-design--performance)
-
-
 ## Assumptions
-- The flight is vertical in air and water, but I haven't thought about the implications of forward flight yet.
-- Most of the design is done to cater the Hover scenario, but for climb the values can be obtained using the tools built.
-- It is assumed that Cd_water is approx 10 times that of Cd_air for an airfoil.
-- Compressibility of the flow is not accounted for.
+- The drone flight is vertical, haven't thought about the implications of forward flight.
+- Most of the design is done ([table](#rotor-design--performance)) to cater the Hover scenario, The tools give a chance to vary the Climb Velocity too. Compressibility of the flow is not accounted.
+- It is assumed that Cd_water is ~ 10 times that of Cd_air for an airfoil.
+
 ## Initial Sizing
-- The payload mass was given to be 5 kg. I took the total mass to be 15 kg.
-- Also Total Volume to be 0.008 (3 times the volume of the payload.)
+- The payload mass = 5 kg, I took the total mass to be 15 kg, total Volume to be 0.008 (3 times the volume of the payload).
 ### Rotor Diameter
-It was taken to be 1.7 m . Roughly estimated by looking through drone blades here: [Link](https://uav-en.tmotor.com/html/UAV/Multirotor/Propellers/NS/)
+- By trail and error: 1.7 m . Initial Rough estimation by looking through drone blades [Link](https://uav-en.tmotor.com/html/UAV/Multirotor/Propellers/NS/)
 ### Ideal Power 
 - Air       
 
@@ -51,7 +46,7 @@ It was taken to be 1.7 m . Roughly estimated by looking through drone blades her
     - blade2.py
     - blade3.py
   - tools
-    - __init__.py
+    - \__init__\.py
     - airfoil.py
     - BET.py
     - BEM.py
@@ -65,11 +60,12 @@ It was taken to be 1.7 m . Roughly estimated by looking through drone blades her
     Thrust, Power equations are written from the respective theories, taken directly from the slides of our Course.
 - **Prandtl Tip Loss :**
     In case of BEM theory Lamda is not constant, depends on r and F(tip loss factor) . Where F in turn depends on r again. So there is a function to keep calculating F, Lamda until they converge.
-- Tools written for both the theories have lot of paramters that can be varied as written in the Initialization point.
 
 ## Benchmarking the Tools
-### Expermental Results are taken from [Link](https://ntrs.nasa.gov/api/citations/19930081433/downloads/19930081433.pdf), Where Sigma = 0.0636 ; b = 3
+### Expermental Results are taken [from](https://ntrs.nasa.gov/api/citations/19930081433/downloads/19930081433.pdf), Where Sigma = 0.0636 ; b = 3
 - CT vs θ_0 plots: B.E.T, B.E.M.T, experimental results 
+  - BE, BEM Thrust values are apart. I think this is atributed to the fact that BEM has varying lamda which helps the phi to adjust so that AoA is optimal at every radius. 
+  - I varied chord linearly for BEM, took C-mean for BE that can have some influence.
 
 ![](images/Ct_tita.png)
 
@@ -80,14 +76,19 @@ It was taken to be 1.7 m . Roughly estimated by looking through drone blades her
 
 ## Design Variable Variations
 - Coefficients of Thrust and Power vs Solidity
+  - It's expected to be linear because the dependency on chord is linear for T and P. solidity = k* chord, in this case b, R weren't changed.
 
-| <img src="images/ct_sigma.png" width="300"/> | <img src="images/cp_sigma.png" width="310"/> |
+| <img src="images/ct_sigma.png" width="300"/> | <img src="images/cp_sigma.png" width="300"/> |
 
 - Coefficients of Thrust and Power vs Taper ratio
+  - Chord = A - B*r , A = 0.12m and B was calculated with help of taper ratio.
+  - It has to decrease because with decrease in chord , Lift Decreases.
 
 | <img src="images/ct_taperRatio.png" width="300"/> | <img src="images/cp_taperRatio.png" width="300"/> |
 
 - Coefficients of Thrust and Power vs Twist
+  - linear_twist = 0.3 - b*r; where b is varied with regard to the twist.
+  - Higher twist implies if tita_root is constant, the tita_tip is decreading => AoA is decreasing causing the lift to decrease.
 
 | <img src="images/ct_twist.png" width="300"/> | <img src="images/cp_twist.png" width="300"/> |
 
@@ -121,8 +122,8 @@ It was taken to be 1.7 m . Roughly estimated by looking through drone blades her
 | Power at Max Thrust in Water| 144.405| 267.0623      | 240.1076       |
 
 ## Acknowledgement
-- I wanna thank Taha my classmate, we had a lot of the discussion to understand why things are varying in a certain way.
-- Thanks to Prof Dwanil Shukla , He helped me with doubts I had in the way to approach this Assignment
+- To Taha my classmate, we had a lot of the discussion to understand why things are varying in a certain way.
+- To Prof Dwanil Shukla , He helped me with doubts I had in the way to approach this Assignment
 
 ## Reference
 - [ Knight, M., & Hefner, R. A. (1937). Static thrust analysis of the lifting airscrew. ](https://ntrs.nasa.gov/api/citations/19930081433/downloads/19930081433.pdf)
