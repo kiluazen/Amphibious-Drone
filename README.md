@@ -1,44 +1,18 @@
 # Assignment 1 -> Amphibous Rotor Design
 
-Welcome to the rotor design report! This document contains step by step process taken towards applying basic design theories like Blade Element, Momentum Theory to design a rotor for which a drone can move in air and water.
-## Contents
-1. [Starting Assumptions & Data](#assumptions)
-2. [Initial Sizing](#initial-sizing)
-    - [Rotor Diameter](#rotor-diameter)
-    - [Ideal Power](#ideal-power)
+Welcome to the rotor design! This document contains step by step process taken towards applying basic design theories like Blade Element, Momentum Theory.
+Later applying them for Forward Flight. Cyclic Pitch inputs, making the Moments zero. 
+Designing a Tail Rotor to counter the Torque produced by the hub on the body.
 3. [My Code Folder Structure](#file-structure)
 4. [Computational Tool](#code-structure)
 5. [Benchmarking the Tools](#benchmarking-the-tools)
 6. [Design Variable Variations](#design-variable-variations)
 7. [Rotor Design & Performance](#rotor-design--performance)
-## Assumptions
-- The drone flight is vertical, haven't thought about the implications of forward flight.
-- Most of the design is done ([table](#rotor-design--performance)) to cater the Hover scenario, The tools give a chance to vary the Climb Velocity too. Compressibility of the flow is not accounted.
-- It is assumed that Cd_water is ~ 10 times that of Cd_air for an airfoil.
 
-## Initial Sizing
-- The payload mass = 5 kg, I took the total mass to be 15 kg, total Volume to be 0.008 (3 times the volume of the payload).
-### Rotor Diameter
-- By trail and error: 1.7 m . Initial Rough estimation by looking through drone blades [Link](https://uav-en.tmotor.com/html/UAV/Multirotor/Propellers/NS/)
-### Ideal Power 
-- Air       
-
-    $T = totalMass * g $
-
-    In Hover : 
-                $v = \sqrt{\frac{T}{2\rho_a A}}$
-                
-    $Power = T * v$ ~ 755 W
-- Water
-    
-    $T = totalMass * g - \rho_w * Vol* g$
-
-    In Hover : $v = \sqrt{\frac{T}{2\rho_w A}}$
-                
-     $Power = T * v$  ~ 8.5 W
 ## File Structure
 - Rotor Blade Design
-  - A1.ipynb
+  - tinkering.ipynb
+  - tailRotor.ipynb
   - Validation.ipynb
   - readme.md
   - blades
@@ -50,49 +24,39 @@ Welcome to the rotor design report! This document contains step by step process 
     - airfoil.py
     - BET.py
     - BEM.py
+    - Forward.py
   - Images
 
 ## Code Structure
-### Working/Algorithm/Logic Flow Diagram of the Tools
-- **Initialization :**
-    The class files in tools folder is initialized with parameters, including the number of blades, angular velocity, rotor radius, lift slope, drag , linear twist, climb velocity, root cutouts, linear taper, and medium (air or water).
-- **Thrust Power Coefficients :**
-    Thrust, Power equations are written from the respective theories, taken directly from the slides of our Course.
-- **Prandtl Tip Loss :**
-    In case of BEM theory Lamda is not constant, depends on r and F(tip loss factor) . Where F in turn depends on r again. So there is a function to keep calculating F, Lamda until they converge.
+Code is Modular.
+In the tools section each file has classes written for forward flight, rotor blade, BEM theory etc..
 
-## Benchmarking the Tools
-### Expermental Results are taken [from](https://ntrs.nasa.gov/api/citations/19930081433/downloads/19930081433.pdf), Where Sigma = 0.0636 ; b = 3
-- CT vs θ_0 plots: B.E.T, B.E.M.T, experimental results 
-  - BE, BEM Thrust values are apart. I think this is atributed to the fact that BEM has varying lamda which helps the phi to adjust so that AoA is optimal at every radius. 
-  - I varied chord linearly for BEM, took C-mean for BE that can have some influence.
+tinkering.ipynb was a playground where all the classes from the tools are improted, and the design specs are changed based on Moment, Thrust, Torque plots.
 
-![](images/Ct_tita.png)
+tailRotor.ipynb where the iteration was done to reach a dail design.
+## Trim Conditions
+|**Operation Conditions**   | Forward Flight | Veritcal Climb | 
+|-----------------------|-----------|----------|
+|$\theta$ 0 |14|14|
+|$\theta$ 1s |2|-0.01|
+|$\theta$ 1c |2|0|
+|twist slope |-0.05|-0.05|
+|$\alpha$ TPP |3.5|0|
+|$\beta$ 0|1.8|1|
+|Net Vertical Force|530 N|380 N|
+|Net Longitudinal Force|35 N| 0|
+|Pitch Moment|0.416|0.412|
+|Roll Moment|0.532|0|
 
-- CQ vs θ_0 plots: B.E.T, B.E.M.T, experimental results
-
-![](images/Cq_tita.png)
-
-
-## Design Variable Variations
-- Coefficients of Thrust and Power vs Solidity
-  - It's expected to be linear because the dependency on chord is linear for T and P. solidity = k* chord, in this case b, R weren't changed.
-
-| <img src="images/ct_sigma.png" width="300"/> | <img src="images/cp_sigma.png" width="300"/> |
-
-- Coefficients of Thrust and Power vs Taper ratio
-  - Chord = A - B*r , A = 0.12m and B was calculated with help of taper ratio.
-  - It has to decrease because with decrease in chord , Lift Decreases.
-
-| <img src="images/ct_taperRatio.png" width="300"/> | <img src="images/cp_taperRatio.png" width="300"/> |
-
-- Coefficients of Thrust and Power vs Twist
-  - linear_twist = 0.3 - b*r; where b is varied with regard to the twist.
-  - Higher twist implies if tita_root is constant, the tita_tip is decreading => AoA is decreasing causing the lift to decrease.
-
-| <img src="images/ct_twist.png" width="300"/> | <img src="images/cp_twist.png" width="300"/> |
-
-
+## Tail Rotor Design
+|**Design Parameter**   | Quantity  | 
+|-----------------------|-----------|
+| Airfoil | NACA 2412|
+|Rotor Radius| 0.3 m|
+|Rotor Speed| 2000 rpm|
+|No of blades|4|
+|Chord Length|0.08 m|
+|Root cutout|0.05m|
 ## Rotor Design & Performance
 |**Design Parameter**   | Design 1       | Design 2       | Design 3       |
 |-----------------------|----------------|----------------|----------------|
@@ -120,6 +84,17 @@ Welcome to the rotor design report! This document contains step by step process 
 | Stall Collective Pitch Angle in Water| 20 | 16           | 17             |
 | Maximum Thrust Before Stall in Water| 267.908| 406.959   | 389.654        |
 | Power at Max Thrust in Water| 144.405| 267.0623      | 240.1076       |
+
+## Some Plots.
+Contour Plots. If you see the image is symmetrical => Moments are near zero.
+![](./images/contour.png)
+
+Plots of Thrust, Torwque, Pitch Moment, Roll Moment vs $\theta$ 0, $\theta$ 1c, $\theta$ 1s
+
+![](./images/forces_vs_theta.png)
+![](./images/forces_theta_1c.png)
+![](./images/forces_theta_1s.png)
+
 
 ## Acknowledgement
 - To Taha my classmate, we had a lot of the discussion to understand why things are varying in a certain way.
