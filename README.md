@@ -3,11 +3,12 @@
 Welcome to the rotor design! This document contains step by step process taken towards applying basic design theories like Blade Element, Momentum Theory.
 Later applying them for Forward Flight. Cyclic Pitch inputs, making the Moments zero. 
 Designing a Tail Rotor to counter the Torque produced by the hub on the body.
-3. [My Code Folder Structure](#file-structure)
-4. [Computational Tool](#code-structure)
-5. [Benchmarking the Tools](#benchmarking-the-tools)
-6. [Design Variable Variations](#design-variable-variations)
-7. [Rotor Design & Performance](#rotor-design--performance)
+1. [My Code Folder Structure](#file-structure)
+2. [Computational Tool](#code-structure)
+3. [Trim Conditions](#trim-condition)
+4. [Tail Rotor](#tail-rotor-design)
+5. [Rotor Design & Performance](#rotor-design--performance)
+6. [Plots](#plots)
 
 ## File Structure
 - Rotor Blade Design
@@ -85,7 +86,7 @@ tailRotor.ipynb where the iteration was done to reach a dail design.
 | Maximum Thrust Before Stall in Water| 267.908| 406.959   | 389.654        |
 | Power at Max Thrust in Water| 144.405| 267.0623      | 240.1076       |
 
-## Some Plots.
+## Plots
 Contour Plots. If you see the image is symmetrical => Moments are near zero.
 ![](./images/contour.png)
 
