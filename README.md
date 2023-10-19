@@ -1,4 +1,4 @@
-# Assignment 1 -> Amphibous Rotor Design
+# Amphibous Rotor Design
 
 Welcome to the rotor design! This document contains step by step process taken towards applying basic design theories like Blade Element, Momentum Theory.
 Later applying them for Forward Flight. Cyclic Pitch inputs, making the Moments zero. 
